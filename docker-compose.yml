@@ -38,13 +38,23 @@ services:
     image: nginx:alpine
     container_name: learning-nginx
     restart: always
-    ports:
-      - 80:80
+    expose:
+      - 80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
+    environment:
+      - VIRTUAL_HOST=emporiodelastelas.website,www.emporiodelastelas.website
     networks:
       - learning
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
 networks:
   learning:
