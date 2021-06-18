@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:7.2-fpm
 
 # Arguments defined in docker-compose.yml
 ARG user
@@ -32,10 +32,6 @@ RUN install-php-extensions zip
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -- \
-    && apt-get install -y nodejs \
-    && apt-get autoremove -y
 
 # Set working directory
 WORKDIR /var/www
