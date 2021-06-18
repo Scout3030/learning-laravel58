@@ -35,14 +35,13 @@ services:
       - learning
 
   nginx:
-    image: nginx:alpine
+    image: nginx
     container_name: learning-nginx
     restart: always
     expose:
       - 80
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
     environment:
       - VIRTUAL_HOST=emporiodelastelas.website,www.emporiodelastelas.website
     networks:
